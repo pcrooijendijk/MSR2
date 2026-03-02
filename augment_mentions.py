@@ -16,7 +16,6 @@ from dotenv import load_dotenv
 
 load_dotenv() 
 KEYS = [os.getenv(f"KEY_{i}") for i in range(11) if os.getenv(f"KEY_{i}")]
-KEY_INDEX = 1
 
 PATTERNS: Dict[str, Pattern[str]] = {
     "CVE": re.compile(r"\bCVE-\d{4}-\d{4,7}\b", re.IGNORECASE),
@@ -234,10 +233,9 @@ def make_snippet(text: str, start: int, end: int, context: int = 80) -> str:
     return text[left:right].replace("\n", " ").strip()
 
 
-def scan_repo(repo_full_name: str, state: str, max_per_pattern: int, sleep_s: float) -> List[Match]:
-    auth = Auth.Token(KEYS[KEY_INDEX])
+def scan_repo(repo_full_name: str, state: str, max_per_pattern: int, sleep_s: float, key_token: int) -> List[Match]:
+    auth = Auth.Token(KEYS[key_token])
     gh = Github(auth=auth, per_page=100)
-    gh = check_limit_range(gh)
     repo: Repository = gh.get_repo(repo_full_name)
 
     matches: List[Match] = []
@@ -290,8 +288,9 @@ def main() -> int:
     ap.add_argument("--github-token", help="GitHub API token (overrides GITHUB_TOKEN env var)")
     args = ap.parse_args()
 
-    if args.github_token:
-        os.environ["GITHUB_TOKEN"] = args.github_token
+    # if args.github_token:
+    #     KEY_INDEX = args.github_token
+    #     os.environ["GITHUB_TOKEN"] = args.github_token
 
     repos: List[str] = []
     if args.repos_json:
@@ -327,6 +326,7 @@ def main() -> int:
                 args.state,
                 args.max_per_pattern,
                 args.sleep,
+                args.github_token
             )
 
             for m in repo_matches:
