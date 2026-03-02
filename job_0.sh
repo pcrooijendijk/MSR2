@@ -1,12 +1,13 @@
 #!/bin/bash
+#SBATCH --job-name=gh-augment
 #SBATCH --account=cseduproject
 #SBATCH --partition=cnczshort
-#SBATCH --qos=csedu-normal
-#SBATCH --ntasks=10
-#SBATCH --cpus-per-task=1
+#SBATCH --qos=csedu-nor+
 #SBATCH --time=11:00:00
-#SBATCH --output=job_0.out
-#SBATCH --error=job_0.err
+#SBATCH --cpus-per-task=1
+#SBATCH --array=0-10
+#SBATCH --output=logs/job_%A_%a.out
+#SBATCH --error=logs/job_%A_%a.err
 
 # Navigate to the project directory
 cd /vol/csedu-nobackup/project/prooijendijk/MSR2
