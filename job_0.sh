@@ -2,7 +2,7 @@
 #SBATCH --job-name=gh-augment
 #SBATCH --account=cseduproject
 #SBATCH --partition=cnczshort
-#SBATCH --qos=csedu-nor+
+#SBATCH --qos=csedu-normal
 #SBATCH --time=11:00:00
 #SBATCH --cpus-per-task=1
 #SBATCH --array=0-10
