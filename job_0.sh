@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --account=cseduproject
-#SBATCH --partition=cnczshort
+#SBATCH --qos=csedu-nor+s
 #SBATCH --qos=csedu-small
 #SBATCH --cpus-per-task=1
 #SBATCH --time=11:00:00
