@@ -100,23 +100,6 @@ class Match:
     actor_type: str
     mentioned_at: str
 
-def change_key(g: Github) -> Github:
-    # Function for changing the key to the next one
-    global KEY_INDEX
-    KEY_INDEX = (KEY_INDEX + 1) % len(KEYS) # Ensures going back to the first key if needed
-    auth = Auth.Token(KEYS[KEY_INDEX])
-    g = Github(auth=auth)
-    return g
-
-def check_limit_range(g: Github) -> Github:
-    # Function that checks the rate limit, for getting the remaining requests and changes the key if needed
-    requests_remaining = g.get_rate_limit().rate.remaining
-
-    # If the amount of requests is below 200, then change/rotate the key
-    if requests_remaining <= 200: 
-        g = change_key(g)
-    return g
-
 def extract_search_tokens(pattern_name: str, regex: Pattern[str]) -> str:
     if pattern_name == "SUSE":
         return '"openSUSE" SUSE'
@@ -125,7 +108,6 @@ def extract_search_tokens(pattern_name: str, regex: Pattern[str]) -> str:
     if pattern_name == "strong_vuln_patterns":
         return "security OR vulnerability OR exploit OR attack OR XSS OR RCE"
     return pattern_name
-
 
 def search_candidate_prs(
     gh: Github,
