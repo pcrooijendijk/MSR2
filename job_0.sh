@@ -13,4 +13,4 @@ cd /vol/csedu-nobackup/project/prooijendijk/MSR2
 
 # Commands to run your program go here, e.g.:
 ID=0
-python augment_mentions.py --repos-json html_lists/html_list_${ID}.json --github-token ${ID}
+python augment_mentions.py --repos-json html_lists/html_list_${ID}.json --github-token ${ID} --out-csv augmented_mentions_${ID}.csv
