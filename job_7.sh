@@ -6,8 +6,8 @@
 #SBATCH --mem=15G
 #SBATCH --gres=gpu:1
 #SBATCH --time=8:00:00
-#SBATCH --output=FL-%j.out
-#SBATCH --error=FL-%j.err
+#SBATCH --output=job_7.out
+#SBATCH --error=job_7.err
 
 # Navigate to the project directory
 cd /vol/csedu-nobackup/project/prooijendijk/MSR2
