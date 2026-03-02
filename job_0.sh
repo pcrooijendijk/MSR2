@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=cseduproject
 #SBATCH --partition=cnczshort
-#SBATCH --qos=csedu-nor+
+#SBATCH --qos=csedu-normal
 #SBATCH --ntasks=10
 #SBATCH --cpus-per-task=1
 #SBATCH --time=11:00:00
