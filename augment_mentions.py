@@ -216,7 +216,7 @@ def make_snippet(text: str, start: int, end: int, context: int = 80) -> str:
 
 
 def scan_repo(repo_full_name: str, state: str, max_per_pattern: int, sleep_s: float, key_token: int) -> List[Match]:
-    auth = Auth.Token(KEYS[key_token])
+    auth = Auth.Token(KEYS[int(key_token)])
     gh = Github(auth=auth, per_page=100)
     repo: Repository = gh.get_repo(repo_full_name)
 
