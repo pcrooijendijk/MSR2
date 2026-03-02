@@ -123,6 +123,8 @@ def extract_search_tokens(pattern_name: str, regex: Pattern[str]) -> str:
         return '"openSUSE" SUSE'
     if pattern_name == "ASB":
         return "ASB PUB"
+    if pattern_name == "strong_vuln_patterns":
+        return "security OR vulnerability OR exploit OR attack OR XSS OR RCE"
     return pattern_name
 
 
