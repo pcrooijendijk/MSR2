@@ -5,8 +5,8 @@
 #SBATCH --qos=csedu-large
 #SBATCH --time=11:00:00
 #SBATCH --cpus-per-task=1
-#SBATCH --output=logs/job_%A_%a.out
-#SBATCH --error=logs/job_%A_%a.err
+#SBATCH --output=job_0.out
+#SBATCH --error=job_0.err
 
 # Navigate to the project directory
 cd /vol/csedu-nobackup/project/prooijendijk/MSR2
