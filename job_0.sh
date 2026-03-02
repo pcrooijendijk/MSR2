@@ -1,11 +1,10 @@
 #!/bin/bash
 #SBATCH --job-name=gh-augment
 #SBATCH --account=cseduproject
-#SBATCH --partition=cnczshort
+#SBATCH --partition=csedu-prio,csedu
 #SBATCH --qos=csedu-large
 #SBATCH --time=11:00:00
 #SBATCH --cpus-per-task=1
-#SBATCH --array=0-10
 #SBATCH --output=logs/job_%A_%a.out
 #SBATCH --error=logs/job_%A_%a.err
 
