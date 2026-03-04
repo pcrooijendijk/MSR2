@@ -53,8 +53,10 @@ PATTERNS: Dict[str, Pattern[str]] = {
 
     "denial_of_service": re.compile(r"(?i)(denial.of.service|dos|infinite.loop|ReDoS)", re.IGNORECASE),
     "remote_code_execution": re.compile(r"(?i)(remote.code.execution|RCE|exploit|malicious)", re.IGNORECASE),
-    "web_vulnerabilities": re.compile(r"(?i)(\bXSS\b|cross.site|XXE|open.redirect|clickjack|session.fixation|hijack|x−frame−options|\bcross−oriдin\b|unauthori[z|s]ed)", re.IGNORECASE),
-    "vulnerability_ids": re.compile(r"(?i)(CVE|NVD|vuln|advisory|insecure|security|OSVDB)", re.IGNORECASE),
+    "web_vulnerabilities_1": re.compile(r"(?i)(session.fixation|hijack|x−frame−options|\bcross−oriдin\b|unauthori[z|s]ed)", re.IGNORECASE),
+    "web_vulnerabilities_2": re.compile(r"(?i)(\bXSS\b|cross.site|XXE|open.redirect|clickjack|session.fixation|hijack|x−frame−options|\bcross−oriдin\b|unauthori[z|s]ed)", re.IGNORECASE),
+    "vulnerability_ids_1": re.compile(r"(?i)(CVE|CWE|NVD|vuln|advisory)", re.IGNORECASE),
+    "vulnerability_ids_2": re.compile(r"(?i)(insecure|security|OSVDB)", re.IGNORECASE),
     "directory_traversal": re.compile(r"(?i)(directory.traversal)", re.IGNORECASE),
     # "strong_vuln_patterns": re.compile(r"(?i)(denial.of.service|\bXXE\b|remote.code.execution|\bopen.redirect|OSVDB|\bvuln|\bCVE\b|\bXSS\b|\bReDoS\b|\bNVD\b|malicious|x− frame− options|attack|cross.site|exploit|directory.traversal|\bRCE\b|\bdos\b|\bXSRF\b|clickjack|session.fixation|hijack|advisory|insecure|security|\bcross− oriдin\b|unauthori[z|s]ed|infinite.loop)", re.IGNORECASE),
     
@@ -119,14 +121,18 @@ def extract_search_tokens(pattern_name: str, regex: Pattern[str]) -> str:
         return "denial of service OR DOS OR infinite lop OR ReDoS"
     if pattern_name == "remote_code_execution":
         return "Remote code execution OR RCE OR exploit OR malicious"
-    if pattern_name == "web_vulnerabilities":
-        return "XSS OR cross site OR XXE OR open redirect OR clickjack OR session fixation OR hijack OR x-frame-options OR cross−oriдin OR unauthorised OR unauthorized"
-    if pattern_name == "vulnerability_ids":
-        return "CVE OR CWE NVD OR vuln OR advisory OR insecure OR security OR OSVDB"
+    if pattern_name == "web_vulnerabilities_1":
+        return "XSS OR cross site OR XXE OR open redirect OR clickjack"
+    if pattern_name == "web_vulnerabilities_2":
+        return "session fixation OR hijack OR x-frame-options OR cross−oriдin OR unauthorised"
+    if pattern_name == "vulnerability_ids_1":
+        return "CVE OR CWE OR NVD OR vuln OR advisory"
+    if pattern_name == "vulnerability_ids_2":
+        return "insecure OR security OR OSVDB"
     if pattern_name == "directory_traversal":
         return "directory traversal"
-    if pattern_name == "url":
-        return " OR ".join(additional_urls)
+    # if pattern_name == "url":
+    #     return " OR ".join(additional_urls)
     return pattern_name
 
 def search_candidate_prs(
